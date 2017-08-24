@@ -9,59 +9,78 @@
         var yellowsound = new Audio('app/resources/YellowSound3.mp3');
         var greensound = new Audio('app/resources/GreenSound4.mp3');
         var buzzer = new Audio('app/resources/Buzzer.mp3');
-        
+
+        /* bluesound.onended = function(){
+             tileFactory.resetBluetile();
+         }*/
+        module.resetsound = function () {
+            self.resetbluesound();
+            self.resetredsound();
+            self.resetgreensound();
+            self.resetyellowsound();
+        }
         module.playbluesound = function () {
+        
             if (!bluesound.mute) {
                 if (!bluesound.paused) {
-                    bluesound.pause();
+              //      bluesound.pause();
                     bluesound.currentTime = 0;
                 }
                 bluesound.play();
+                console.log('SF BLUE')
             }
+
         };
         module.resetbluesound = function () {
             if (!bluesound.paused) {
-                bluesound.pause();
+          //      bluesound.pause();
             };
             bluesound.currentTime = 0;
         };
         module.playredsound = function (isMuted) {
+         //   self.resetsound();
             if (!redsound.mute) {
                 if (!redsound.paused) {
-                    redsound.pause();
+          //          redsound.pause();
                     redsound.currentTime = 0;
                 }
                 redsound.play();
+                console.log('SF RED')
             }
+
         };
         module.resetredsound = function () {
             if (!redsound.paused) {
-                redsound.pause();
+         //       redsound.pause();
             }
             redsound.currentTime = 0;
         };
         module.playgreensound = function () {
+          //  self.resetsound();
             if (!greensound.mute) {
                 if (!greensound.paused) {
-                    greensound.pause();
+                 //   greensound.pause();
                     greensound.currentTime = 0;
                 }
                 greensound.play();
+                console.log('SF GREEN')
             }
         };
         module.resetgreensound = function () {
             if (!greensound.paused) {
-                greensound.pause();
+          //      greensound.pause();
             };
             greensound.currentTime = 0;
         };
         module.playyellowsound = function () {
+          //  self.resetsound();
             if (!yellowsound.mute) {
                 if (!yellowsound.paused) {
-                    yellowsound.pause();
+                  //  yellowsound.pause();
                     yellowsound.currentTime = 0;
                 }
                 yellowsound.play();
+                console.log('SF YELLOW')
             }
         };
         module.resetyellowsound = function () {
@@ -73,7 +92,7 @@
         module.playbuzzer = function () {
             if (!buzzer.mute) {
                 if (!buzzer.paused) {
-                    buzzer.pause();
+                 //   buzzer.pause();
                     buzzer.currentTime = 0;
                 }
                 buzzer.play();
@@ -85,7 +104,7 @@
             };
             buzzer.currentTime = 0;
         };
-        
+
 
 
         return module;
