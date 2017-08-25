@@ -31,11 +31,12 @@
 
         vm.actionPlayGreen = function () {
             secuenceFactory.playGreen();
+            //we wait for secuenceFactory.playGreen() finish to revert the tile´s color  
             $timeout(function () {
                 tileFactory.drawtile(greencanvas, gprop, "green");
             }, 250);
             console.log('compKey sec GREEN');
-        }
+        };
 
         vm.actionPlayRed = function () {
             secuenceFactory.playRed();
@@ -44,7 +45,7 @@
             }, 250);
             console.log('compKey sec RED');
 
-        }
+        };
         vm.actionPlayYellow = function () {
             secuenceFactory.playYellow();
             $timeout(function () {
@@ -52,7 +53,7 @@
             }, 250);
             console.log('compKey sec YELOW');
 
-        }
+        };
         vm.actionPlayBlue = function () {
             secuenceFactory.playBlue();
             $timeout(function () {
@@ -60,14 +61,14 @@
             }, 250);
             console.log('compKey sec BLUE');
 
-        }
+        };
 
         vm.draw = function () {
             tileFactory.drawtile(greencanvas, gprop, "green");
             tileFactory.drawtile(redcanvas, rprop, "#E50000");
             tileFactory.drawtile(bluecanvas, bprop, "#0000FF");
             tileFactory.drawtile(yellowcanvas, yprop, "#DDDD00");
-        }
+        };
         vm.getEl = function (element) {
 
             switch (element) {
@@ -95,27 +96,30 @@
                     console.log('compKey case DEFAULT');
             }
 
-        }
-        vm.draw();
+        };
         vm.playSecuence = function () {
             sectoplay = secuenceFactory.getSecuence();
-            console.log('compKey sectoplay', sectoplay);
-            for (var i = 0; i < sectoplay.length; i++) {
-
-                vm.getEl(sectoplay[i]);
-              
-                console.log('compKey for sectoplay[i]', sectoplay[i]);
+            var i = 0;                     //  set your counter to 0
+            
+            function myLoop () {           //  create a loop function
+               setTimeout(function () {    //  call a Xs setTimeout when the loop is called
+                vm.getEl(sectoplay[i]);          //  your code here
+                  i++;                     //  increment the counter
+                  if (i < sectoplay.length) {            //  if the counter < sectoplay.length, call the loop function
+                     myLoop();             //  ..  again which will trigger another 
+                  }                        //  ..  setTimeout()
+               }, 400);
             }
+            
+            myLoop();
+        }
+        vm.getPlayerSecuence = function (){
+            
         }
 
-
-
-
-
-
+        vm.draw();
     }
 })(angular);
-
 
 
 
