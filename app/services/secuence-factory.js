@@ -3,7 +3,7 @@
     function secuenceFactory(tileFactory, soundFactory) {
         var module = {};
         var self = module;
-        var secuenceArray = [];
+        var secuencearray = [];
         /**index which increments +1 when the secuence is played ok */
       //  var difficulty;
         var greencanvas;
@@ -59,18 +59,36 @@
         /**secuenciacion */
         // Retorna un número aleatorio entre min (incluido) y max (excluido)
         function getRandomArbitrary() {
-            return Math.floor(Math.random() * (5 - 1)) + 1;
+            var element =Math.floor(Math.random() * (5 - 1)) + 1;
+
+            return element;
         }
   
         module.getSecuence=function(){
            // difficulty=difficulty+1;
             var secelement=getRandomArbitrary();
-            console.log('secFactory secelement',secelement)
-            secuenceArray.push(secelement);
-            console.log('secFactory secuenceArray',secuenceArray);
-           return secuenceArray;
-        }
+            if (secuencearray.length<3) {
+                secuencearray.push(secelement);
+             } else {
 
-        return module;
+                     if ((secuencearray[secuencearray.length-3]==secuencearray[secuencearray.length-2])
+                         && 
+                        (secuencearray[secuencearray.length-2] == secuencearray[secuencearray.length-1]
+                         && secuencearray[secuencearray.length-1]==secelement) ){
+                            secelement=getRandomArbitrary();
+                         } else{
+                             secuencearray.push(secelement);
+                        }
+                        
+                       
+                    }
+        return secuencearray;
+        }; 
+
+
+
+
+        
+       return module;
     };
 })(angular);

@@ -27,7 +27,7 @@
                     bluesound.currentTime = 0;
                 }
                 bluesound.play();
-                console.log('SF BLUE')
+               
             }
 
         };
@@ -45,7 +45,7 @@
                     redsound.currentTime = 0;
                 }
                 redsound.play();
-                console.log('SF RED')
+                
             }
 
         };
@@ -63,7 +63,7 @@
                     greensound.currentTime = 0;
                 }
                 greensound.play();
-                console.log('SF GREEN')
+               
             }
         };
         module.resetgreensound = function () {
@@ -80,7 +80,7 @@
                     yellowsound.currentTime = 0;
                 }
                 yellowsound.play();
-                console.log('SF YELLOW')
+               
             }
         };
         module.resetyellowsound = function () {
