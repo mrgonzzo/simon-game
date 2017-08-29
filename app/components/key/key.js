@@ -4,7 +4,7 @@
         // otra opción es poner aquí directamente el html asignándoselo a template:
         templateUrl: 'app/components/key/key.html',
         // en controller definimos la función que escribimos abajo
-        controller: ['$state', 'soundFactory', 'tileFactory', 'secuenceFactory', '$timeout', controllerCompKey],
+        controller: ['$state', 'soundFactory', 'tileFactory', 'secuenceFactory', '$timeout','$q', controllerCompKey],
         // declaramos un alias para no tener que usar $ctrl.
         controllerAs: 'compKey',
         bindings: {
@@ -12,7 +12,7 @@
         }
     });
 
-    function controllerCompKey($state, soundFactory, tileFactory, secuenceFactory, $timeout) {
+    function controllerCompKey($state, soundFactory, tileFactory, secuenceFactory, $timeout,$q) {
         var vm = this;
         var sectoplay = [];
         var playersec = [];
@@ -87,14 +87,10 @@
                     vm.actionPlayYellow();
                     break;
                 default:
-
+                    console.log('compKey case DEFAULT');
             }
 
         };
-        vm.startPlay = function(){
-            vm.playSecuence();
-        };
-
         vm.playSecuence = function () {
             sectoplay = secuenceFactory.getSecuence();
             var i = 0;                     //  set your counter to 0
@@ -110,10 +106,12 @@
             }
 
             myLoop();
+            console.log(sectoplay)
+            return sectoplay;
         }
         vm.getPlayerSecuence = function () {
-
-        }
+            
+            }
 
         vm.draw();
     }
@@ -140,3 +138,75 @@
 
 
 
+ /* 
+        var sel;
+        vm.userSec = function (n){
+            sel=n;
+            return sel
+        }
+        return new Promise(function(resolve, reject){
+            
+                //get some object that can do async tasks
+                var usertile = vm.userSec(n);
+            
+                //when async task ends successfully, resolve promise
+                usertile.onSuccess = function(result){
+                    resolve(result);
+                };
+                //when async task ends with error, reject promise   
+                usertile.onError = function(error){
+                    reject(error);
+                }
+            
+                //perform async operation
+                usertile.doSomething();
+              })
+
+        vm.userEl = function (data) {
+            //playersec.push(n);.
+            var defered = $q.defer();
+            var promise = defered.promise;
+            vm.userSec(data).success(function(data) {
+                            defered.resolve(data);
+                        }).error(function(err) {
+                            defered.reject(err)
+                        });
+            return promise //playersec;
+        }
+        vm.startPlay=function(){
+            vm.cPlay();
+        };
+        var fail = false;
+        var i = 0;
+        vm.check = function () {
+            if (fail != true) {
+           //console.log('if (computersec[i] == vm.userSec())', computersec[i], vm.userEl());
+                vm.userEl().then(function(data) {
+                    chkUser=data;
+                });
+    
+                if (computersec[i] == chkUser) {
+                    i++;
+                    if (i < computersec.length) {            //  if the counter < sectoplay.length, call the loop function
+                        check();             //  ..  again which will trigger another 
+                    } else {
+                        vm.cPlay();
+                    }
+                } else {
+                    secuenceFactory.playBuzz();
+                    fail = true;
+                };
+            }
+       
+    }//end check
+        vm.cPlay = function () {
+            console.log('startPlay clicked')
+            computersec = vm.playSecuence();
+            console.log('computersec', computersec);
+            var i = 0;
+            var fail = false;
+            
+       //     vm.check();
+            
+          
+        }*/
