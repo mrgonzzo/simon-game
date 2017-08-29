@@ -1,10 +1,10 @@
-<div class="simon" >
-  <canvas id="greenkey" class="tile" ng-click="compKey.actionPlayGreen()" width="300" height="300"></canvas>
-  <canvas id="redkey" ng-click="compKey.actionPlayRed()" class="tile" width="300" height="300"></canvas>
-
-<div>
-  <canvas id="bluekey" ng-click="compKey.actionPlayBlue()" class="tile" width="300" height="300"></canvas>
-  <canvas id="yellowkey" ng-click="compKey.actionPlayYellow()" class="tile" width="300" height="300"></canvas>
-</div>
-</div>    
-<div><input type="submit" ng-click="compKey.playSecuence()" value="Empieza a medir tu memoria"></div>
+ <div class="simon" >
+            <canvas id="greenkey" class="tile" ng-click="compKey.actionPlayGreen(); compKey.onClick(1)" width="300" height="300"></canvas>
+            <canvas id="redkey" ng-click="compKey.actionPlayRed(); compKey.onClick(2)" class="tile" width="300" height="300"></canvas>
+      
+          <div>
+            <canvas id="bluekey" ng-click="compKey.actionPlayBlue(); compKey.onClick(3)" class="tile" width="300" height="300"></canvas>
+            <canvas id="yellowkey" ng-click="compKey.actionPlayYellow(); compKey.onClick(4)" class="tile" width="300" height="300"></canvas>
+          </div>
+      </div>    
+      <div><input type="submit" ng-click="compKey.startPlay()" value="Empieza a medir tu memoria"></div>
