@@ -1,6 +1,6 @@
 (function (angular) {
-    angular.module('app').factory('secuenceFactory', ['tileFactory', 'soundFactory', secuenceFactory]);
-    function secuenceFactory(tileFactory, soundFactory) {
+    angular.module('app').factory('secuenceFactory', ['buttonFactory', 'soundFactory', secuenceFactory]);
+    function secuenceFactory(buttonFactory, soundFactory) {
         var module = {};
         var self = module;
         module.secuencearray = [];
@@ -22,44 +22,44 @@
         module.setyellowCanvas = function (canvas) {
             yellowcanvas = canvas;
         }
-        var gprop = tileFactory.getGreencprop();
-        var bprop = tileFactory.getBluecprop();
-        var rprop = tileFactory.getRedcprop();
-        var yprop = tileFactory.getYellowcprop();
+        var gprop = buttonFactory.getGreencprop();
+        var bprop = buttonFactory.getBluecprop();
+        var rprop = buttonFactory.getRedcprop();
+        var yprop = buttonFactory.getYellowcprop();
 
         module.playGreen = function () {
-            tileFactory.drawtile(greencanvas, gprop, "#00FF00");
-            tileFactory.drawtile(redcanvas, rprop, "#E50000");
-            tileFactory.drawtile(bluecanvas, bprop, "#0000FF");
-            tileFactory.drawtile(yellowcanvas, yprop, "#DDDD00");
+            buttonFactory.drawbutton(greencanvas, gprop, "#00FF00");
+            buttonFactory.drawbutton(redcanvas, rprop, "#E50000");
+            buttonFactory.drawbutton(bluecanvas, bprop, "#0000FF");
+            buttonFactory.drawbutton(yellowcanvas, yprop, "#DDDD00");
             soundFactory.playgreensound();
         }
         module.playRed = function () {
-            tileFactory.drawtile(redcanvas, rprop, "#FF3333");
-            tileFactory.drawtile(bluecanvas, bprop, "#0000FF");
-            tileFactory.drawtile(yellowcanvas, yprop, "#DDDD00");
-            tileFactory.drawtile(greencanvas, gprop, "green");
+            buttonFactory.drawbutton(redcanvas, rprop, "#FF3333");
+            buttonFactory.drawbutton(bluecanvas, bprop, "#0000FF");
+            buttonFactory.drawbutton(yellowcanvas, yprop, "#DDDD00");
+            buttonFactory.drawbutton(greencanvas, gprop, "green");
             soundFactory.playredsound();
         }
         module.playYellow = function () {
-            tileFactory.drawtile(yellowcanvas, yprop, "#FFFF00");
-            tileFactory.drawtile(redcanvas, rprop, "#E50000");
-            tileFactory.drawtile(bluecanvas, bprop, "#0000FF");
-            tileFactory.drawtile(greencanvas, gprop, "green");
+            buttonFactory.drawbutton(yellowcanvas, yprop, "#FFFF00");
+            buttonFactory.drawbutton(redcanvas, rprop, "#E50000");
+            buttonFactory.drawbutton(bluecanvas, bprop, "#0000FF");
+            buttonFactory.drawbutton(greencanvas, gprop, "green");
             soundFactory.playyellowsound();
         }
         module.playBlue = function () {
-            tileFactory.drawtile(bluecanvas, bprop, "#00FFFF");
-            tileFactory.drawtile(redcanvas, rprop, "#E50000");
-            tileFactory.drawtile(yellowcanvas, yprop, "#DDDD00");
-            tileFactory.drawtile(greencanvas, gprop, "green");
+            buttonFactory.drawbutton(bluecanvas, bprop, "#00FFFF");
+            buttonFactory.drawbutton(redcanvas, rprop, "#E50000");
+            buttonFactory.drawbutton(yellowcanvas, yprop, "#DDDD00");
+            buttonFactory.drawbutton(greencanvas, gprop, "green");
             soundFactory.playbluesound();
         }
         module.playBuzz = function () {
-            tileFactory.drawtile(bluecanvas, bprop, "#000000");
-            tileFactory.drawtile(redcanvas, rprop, "##000000");
-            tileFactory.drawtile(yellowcanvas, yprop, "##000000");
-            tileFactory.drawtile(greencanvas, gprop, "#000000");
+            buttonFactory.drawbutton(bluecanvas, bprop, "#000000");
+            buttonFactory.drawbutton(redcanvas, rprop, "##000000");
+            buttonFactory.drawbutton(yellowcanvas, yprop, "##000000");
+            buttonFactory.drawbutton(greencanvas, gprop, "#000000");
             soundFactory.playbuzzer();
         }
         /**secuenciacion */
@@ -70,19 +70,19 @@
         }
   
         module.getSecuence=function(){
-           var secelement=getRandomArbitrary();//select a random tile
+           var secelement=getRandomArbitrary();//select a random button
             var secelementB;
-            //this if manage the three first positions becose ther is no proble to repeat 3 tiles
+            //this if manage the three first positions becose ther is no proble to repeat 3 buttons
             if (self.secuencearray.length<3) {
                 self.secuencearray.push(secelement);
              } else {
-                    //now we test if the fourth element its equal to the three inmediatly before tiles, when this tiles are equal
+                    //now we test if the fourth element its equal to the three inmediatly before buttons, when this buttons are equal
                      if ((self.secuencearray[self.secuencearray.length-3]===self.secuencearray[self.secuencearray.length-2])
                          && 
                         (self.secuencearray[self.secuencearray.length-2] === self.secuencearray[self.secuencearray.length-1]
                          && self.secuencearray[self.secuencearray.length-1]===secelement) ){
                             secelementB=getRandomArbitrary();
-                            //while new element its equal to the repeated tile get a random tile
+                            //while new element its equal to the repeated button get a random button
                            while (secelement===secelementB){
                                 secelementB=getRandomArbitrary();
                             };

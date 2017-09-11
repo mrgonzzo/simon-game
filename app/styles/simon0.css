@@ -1,4 +1,8 @@
-.tile{
+body{
+      background-color: #222222;
+      
+}
+.button{
     width: 20%;
     height: 20%;
     max-width: 100%;
@@ -6,7 +10,7 @@
     margin-top: 0;
     margin-right: 0;
     margin-bottom:0;
-    }
+}
 
 .simon{
      margin-left: 35%;

@@ -11,7 +11,7 @@
         var buzzer = new Audio('app/resources/Buzzer.mp3');
 
         /* bluesound.onended = function(){
-             tileFactory.resetBluetile();
+             buttonFactory.resetBluebutton();
          }*/
         module.resetsound = function () {
             self.resetbluesound();

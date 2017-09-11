@@ -1,6 +1,6 @@
 (function (angular) {
-    angular.module('app').factory('tileFactory', [tileFactory]);
-    function tileFactory() {
+    angular.module('app').factory('buttonFactory', [buttonFactory]);
+    function buttonFactory() {
         var module = {};
         var self = module;
         
@@ -54,7 +54,7 @@
         return greencprop
         };
 
-        module.drawtile = function (canvas, properties, color) {
+        module.drawbutton = function (canvas, properties, color) {
             if (canvas && canvas.getContext) {
                 var context = canvas.getContext("2d");
                 if (context) {
