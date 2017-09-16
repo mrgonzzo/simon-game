@@ -94,11 +94,14 @@
             }
 
         };
+        //vm.sectoplay = vm.getSecToPlay();
         vm.getSecToPlay = function () {
             sectoplay = secuenceFactory.getSecuence();
+            vm.playSecuence(vm.sectoplay);
+            console.log('peticion de sectoplay: ', sectoplay)
             return sectoplay
         }
-        vm.sectoplay = vm.getSecToPlay();
+
         vm.playSecuence = function () {
 
             vm.PC = true;
@@ -123,73 +126,119 @@
         }
         //************************************************************************************* */
         //asincronous functuion which we don´t know wen is called (user click) so we don´t know wen we get the value
-        var foo;
-        var teclag = document.getElementById("greenkey");
-        var teclar = document.getElementById("redkey");
-        var teclab = document.getElementById("bluekey");
-        var teclay = document.getElementById("yellowkey");
         var val;
+        vm.ArrayUV = [];
+        /*
         vm.getUserelement = new Promise(function (resolve, reject) {
 
             function userValue() {
 
-                console.log('inside sayHello')
-                teclag.addEventListener('click', function () {
+                console.log('inside userValue')
+                greencanvas.addEventListener('click', function () {
                     console.log('listener 1 added')
-
-                    resolve(val = 1);
-
+                    val = 1;
+                    vm.ArrayUV.push(val);
+                    resolve(val);
                 });
-                teclar.addEventListener('click', function () {
+                redcanvas.addEventListener('click', function () {
                     console.log('listener 2 added')
-
-
-                    resolve(val = 2);
-
+                    val = 2;
+                    vm.ArrayUV.push(val);
+                    resolve(val);
                 });
-                teclab.addEventListener('click', function () {
-                    console.log('listener added')
-                    resolve(val = 3);
-
-
+                bluecanvas.addEventListener('click', function () {
+                    console.log('listener 3 added')
+                    val = 3;
+                    vm.ArrayUV.push(val);
+                    resolve(val);
                 });
-                teclay.addEventListener('click', function () {
-                    console.log('listener added')
-
-                    resolve(val = 4);
-
+                yellowcanvas.addEventListener('click', function () {
+                    console.log('listener 4 added')
+                    val = 4;
+                    vm.ArrayUV.push(val);
+                    resolve(val);
                 });
-
             }
 
             userValue();
-
         });
-
-
-        vm.startPlay = function () {
-
-            vm.playSecuence(vm.sectoplay);
-            for (var i = 0; i < vm.sectoplay.length; i++) {
-                console.log('dentro del for', vm.sectoplay[i],vm.sectoplay.length);
-                pc = vm.sectoplay[i];
-                console.log('antes de la promesa vm.sectoplay[i]=', vm.sectoplay[i],' pc=',pc);
-                vm.getUserelement.then(function (val) {
-                    console.log('i=',i,'value: ', val,vm.sectoplay, ' pc ', pc,'sectoplay[i]', vm.sectoplay[i]); // outputs 'Hello World!'
-                      
-                    if (pc != val) {
-                        secuenceFactory.playBuzz();
-                    } else{
-                        vm.getSecToPlay()
+*/
+vm.getUserelement = function(){
+    return $q(function (resolve, reject) {
+        
+                    function userValue() {
+        
+                        console.log('inside userValue')
+                        greencanvas.addEventListener('click', function () {
+                            console.log('listener 1 added')
+                            val = 1;
+                            vm.ArrayUV.push(val);
+                            resolve(val);
+                        });
+                        redcanvas.addEventListener('click', function () {
+                            console.log('listener 2 added')
+                            val = 2;
+                            vm.ArrayUV.push(val);
+                            resolve(val);
+                        });
+                        bluecanvas.addEventListener('click', function () {
+                            console.log('listener 3 added')
+                            val = 3;
+                            vm.ArrayUV.push(val);
+                            resolve(val);
+                        });
+                        yellowcanvas.addEventListener('click', function () {
+                            console.log('listener 4 added')
+                            val = 4;
+                            vm.ArrayUV.push(val);
+                            resolve(val);
+                        });
                     }
+        
+                    userValue();
+                }
 
-                });
-            };//end for
-          //  vm.startPlay();
-            // vm.CompareSecuence(sectoplay,playersec);
-            //vm.getUserelement(foo,callback);
+    );}
+    //var promise = vm.getUserelement();
+        vm.startPlay = function () {
+            vm.sectoplay = vm.getSecToPlay();
+            function compare(sectoplay) {
+                console.log('compare: sectoplay=', sectoplay, 'vm.ArrayUV', vm.ArrayUV);
+                var i = 0;
+                function compareloop(sectoplay) {
+                    var promise = vm.getUserelement();
+                    console.log('compareloop: i=', i, ' sectoplay=', sectoplay, ' vm.ArrayUV', vm.ArrayUV, ' sectoplay[i]=', sectoplay[i])
+                    pc = sectoplay[i];
+                    uv = vm.ArrayUV[i];
+                   promise.then(function (val) {
+                        console.log('dentro de la promesa')
+                        console.log('i=', i, 'value: ', val, 'vm.ArrayUV[]=', vm.ArrayUV, 'vm.ArrayUV[i]', vm.ArrayUV[i], 'sectoplay[]', sectoplay, ' pc=', pc, 'sectoplay[i]=', sectoplay[i]); // outputs 'Hello World!'
+
+                        if (pc != val) {
+                            secuenceFactory.playBuzz();
+                            console.log('BUZZ')
+                            sectoplay.length = 0;
+                            vm.ArrayUV.length = 0;
+                            i = 5000;
+                        } else {
+                            //vm.getSecToPlay()                           
+                            i++;
+                            if (i < sectoplay.length) {
+                                console.log('vuelvo a comparar por que no termina el array')          //  if the counter < sectoplay.length, call the loop function
+                                compareloop(sectoplay);   //  ..  again which will trigger another 
+                            }
+                            
+                            console.log('i++', i);
+                            console.log('comparado ok vuelvo a pedir secuencia')
+                           
+                        }
+                    });
+                   
+ }compareloop(sectoplay);
+            } 
+            compare(vm.sectoplay);
         };
-
         vm.draw();
     }
 })(angular);
+

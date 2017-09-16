@@ -68,7 +68,10 @@
             var element =Math.floor(Math.random() * (5 - 1)) + 1;
             return element;
         }
-  
+        module.resetSec=function(){
+            self.secuencearray.length=0;
+            
+        };
         module.getSecuence=function(){
            var secelement=getRandomArbitrary();//select a random button
             var secelementB;
